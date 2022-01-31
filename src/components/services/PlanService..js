@@ -31,7 +31,7 @@ export async function deletePlan(id) {
       `¿Estas seguro de eliminar el plan con el id ${id} ?`
     );
     if (isDeleted) {
-      //const response = axios.delete("${baseUrl}/plan/" + id); //TODO use in service
+      //const response = axios.delete("http://localhost:4000/api/plan/" + id); //TODO use in service
       const response = axios.delete(`${baseUrl}/plan/${id}`)
       return response;
     } else {
@@ -61,7 +61,7 @@ export async function getPlanById(id) {
 
 export async function postSubject(data, id) {
   try {
-    const response = axios.put(`${baseUrl}/plan/add-subject/${id}`, data)
+    const response = axios.put(`http://localhost:4000/api/plan/add-subject/${id}`, data)
     return response
   } catch (e) {
     console.log(e)
@@ -72,7 +72,7 @@ export async function postSubject(data, id) {
 
 export async function addQuarter(id) {
   try {
-    const response = axios.put(`${baseUrl}/plan/add-quarter/${id}`)
+    const response = axios.put(`http://localhost:4000/api/plan/add-quarter/${id}`)
     return response;
   } catch (e) {
     console.log(e);
@@ -81,7 +81,7 @@ export async function addQuarter(id) {
 
 export async function removeQuarter(id) {
   try {
-    const response = axios.put(`${baseUrl}/plan/remove-quarter/${id}`)
+    const response = axios.put(`http://localhost:4000/api/plan/remove-quarter/${id}`)
     return response;
   } catch (e) {
     console.log(e);
@@ -102,7 +102,7 @@ export async function deleteSubject(id) {
   try {
     let isDeleted = window.confirm(`¿Estas seguro de eliminar el registro con el id ${id} ?`)
     if (isDeleted) {
-      //const response = axios.delete('${baseUrl}/subjects/' + id)
+      //const response = axios.delete('http://localhost:4000/api/subjects/' + id)
       const response = ''
       return response
     } else {
@@ -119,7 +119,7 @@ export async function deleteYear(id, year) {
   try {
     let isDeleted = window.confirm(`¿Estas seguro de eliminar el registro con el id ${id} ?`)
     if (isDeleted) {
-      const response = axios.delete(`${baseUrl}/plan/remove-quarter/${id}/${year}`)
+      const response = axios.delete(`http://localhost:4000/api/plan/remove-quarter/${id}/${year}`)
       return response
     } else {
       return

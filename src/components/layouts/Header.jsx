@@ -46,13 +46,6 @@ export default function Header({}) {
         </div>
         <div className={classes.navItem}>
           <Link className={classes.link} to="/interactive-plan">
-            <Button
-              variant="outlined"
-              style={{ color: "white" }}
-              startIcon={<ParkIcon />}
-            >
-              <label style={{ fontSize: "0.8rem" }}>Plan</label>
-            </Button>
           </Link>
         </div>
       </div>
@@ -64,7 +57,7 @@ const useStyle = makeStyles((theme) => ({
   nav: {
     width: "100%",
     height: "60px",
-    background: "black",
+    background: 'rgba(63, 81, 181, 1.0)'
   },
   navItem: {
     padding: "0.8rem 0.1rem",
@@ -73,6 +66,7 @@ const useStyle = makeStyles((theme) => ({
     color: "white",
     float: "left",
     textDecoration: "none",
+    background: ''
   },
   link: {
     textDecoration: "none",

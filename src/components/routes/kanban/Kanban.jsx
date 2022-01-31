@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { getSubjects } from "../../services/SubjectService.js";
 import { getPlanById } from "../../services/PlanService.";
 import { addQuarter } from "../../services/PlanService.";
+import SaveIcon from '@mui/icons-material/Save';
 
 import ListSubjects from "./ListSubjects";
 import { Grid, IconButton, makeStyles, Paper } from "@material-ui/core";
@@ -122,7 +123,7 @@ export default function App({}) {
       <Button
         variant="contained"
         color="primary"
-        startIcon={<AddIcon />}
+        startIcon={<SaveIcon />}
         disabled={!isModifed}
         onClick={saveChanges}
       >

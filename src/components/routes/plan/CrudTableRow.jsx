@@ -7,6 +7,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { deletePlan } from "../../services/PlanService.";
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 export const CrudTableRow = ({ row }) => {
   // usando la api de context puedo evitar el paso de las propiedades y hacerlas directamente (mejora)
@@ -24,6 +25,9 @@ export const CrudTableRow = ({ row }) => {
         </TableCell>
         <TableCell>{row.totalYears}</TableCell>
         <TableCell align="right">
+        <IconButton className={classes.iconSee}>
+            < VisibilityIcon/>
+          </IconButton>
           <IconButton className={classes.icon}>
             <EditIcon />
           </IconButton>
@@ -33,6 +37,7 @@ export const CrudTableRow = ({ row }) => {
           >
             <ClearIcon />
           </IconButton>
+          
         </TableCell>
       </TableRow>
     </>
@@ -78,6 +83,17 @@ const useStyle = makeStyles((theme) => ({
     color: "black",
     "&:hover, &:focus": {
       background: "red",
+      color: "white",
+    },
+  },
+  iconSee: {
+    textAlign: "center",
+    height: 30,
+    width: 30,
+    padding: theme.spacing(1, 1, 1, 1),
+    color: "black",
+    "&:hover, &:focus": {
+      background: "green",
       color: "white",
     },
   },

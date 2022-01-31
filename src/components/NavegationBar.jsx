@@ -12,8 +12,7 @@ export default function NavegationBar({ db, setDb }) {
       <Routes>
         <Route path="/interactive-plan" element={<Plan />} />
         <Route path="/plans/:id" element={<Kanban data={db} />} />
-        {/*  <Route path="/" element={<Kanban data={db} />} /> */}
-        <Route path="/" element={<div> TESTTT</div>} />
+        <Route path="/" element={<Kanban data={db} />} />
         <Route path="/create-subject" element={<CreateSubject />} />
         <Route path="/plans" element={<CrudTable data={db} />} />
         <Route path="/create-plan" element={<CreatePlan data={db} />} />

@@ -26,7 +26,7 @@ export async function getSubjects() {
 
 export async function postSubject(data, id) {
     try {
-        const response = axios.put(`${baseUrl}/plan/add-subject/${id}`, data)
+        const response = axios.put(`http://localhost:4000/api/plan/add-subject/${id}`, data)
         //http://localhost:4000/api/plan/add-subject/61f5ed09f80f14b0f5ec5f76
         return response
     } catch (e) {

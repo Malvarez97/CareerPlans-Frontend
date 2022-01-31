@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getSubjects } from "../services/SubjectService.js";
 import { makeStyles } from "@material-ui/core";
+import Card from '@mui/material/Card';
+import Grid from '@mui/material/Grid';
+import { color } from "@mui/system";
+
 
 export default function Plan() {
   let history = useNavigate();
@@ -26,7 +30,7 @@ export default function Plan() {
               text: materia.name,
               correlativas: materia.subjects,
               isSelected: false,
-              color: "blue",
+              color: "rgba(48 ,58,68)",
             });
           }
         });
@@ -45,6 +49,7 @@ export default function Plan() {
         }
         if (e.correlativas.includes(materia.text)) {
           materia.color = "green";
+          materia.bordercolor= "3px solid rgb(123, 194, 198)";
         }
         if (materia.correlativas.includes(e.text)) {
           materia.color = "red";
@@ -60,7 +65,7 @@ export default function Plan() {
     var newDB = db;
     newDB.map((año) => {
       año.materias.map((materia) => {
-        materia.color = "blue";
+        materia.color = "rgba(48 ,58,68)";
       });
     });
     setDb([...newDB]);
@@ -73,18 +78,24 @@ export default function Plan() {
 
   return (
     <>
-      <div>
-        <p>Plan de estudios interactivo</p>
+      <div style={{
+                          backgroundColor:"rgba(48 ,58,68)",
+                        }}>
+        <p>Interactive plan</p>
         <p>UNICEN</p>
 
         <div>
           <ul>
             {db.map((listitem) => (
               <li className={classes.year} key={listitem.id}>
+                <Grid 
+                containerdirection="row"
+                justifyContent="center"
+                alignItems="center" >
                 <ul>
                   {listitem.materias.map((s) => (
                     <li className={classes.subject} key={s.id}>
-                      <div
+                      <Card
                         className={classes.cardSubject}
                         value="check"
                         color="secondary"
@@ -97,10 +108,11 @@ export default function Plan() {
                         }}
                       >
                         {s.text}
-                      </div>
+                      </Card>
                     </li>
                   ))}
                 </ul>
+                </Grid>
               </li>
             ))}
           </ul>
@@ -113,12 +125,14 @@ export default function Plan() {
 const useStyle = makeStyles((theme) => ({
   subject: {
     display: "inline-block",
-    backgroundColor: "rgb(255, 255, 255)",
+    backgroundColor: "rgba(255, 255, 255)",
     margin: "1rem 1rem 1rem 1rem",
   },
   cardSubject: {
     width: "150px",
     height: "80px",
+    border: "3px solid rgba(123, 194, 198)",
+    backgroundColor :"rgba(48 ,58,68)",
   },
   year: {
     marginLeft: "auto",
@@ -126,6 +140,9 @@ const useStyle = makeStyles((theme) => ({
     listStyleType: "none",
     paddingLeft: "0rem",
     width: "100%",
+    margin:"10px",
+    background: " rgba(37, 77, 126)",
+
   },
 }));
 
