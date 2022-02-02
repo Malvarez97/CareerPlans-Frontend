@@ -5,6 +5,10 @@ import { makeStyles } from "@material-ui/core";
 import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
 import { color } from "@mui/system";
+import Typography from '@mui/material/Typography';
+import CardContent from '@mui/material/CardContent';
+
+
 
 
 export default function Plan() {
@@ -48,8 +52,7 @@ export default function Plan() {
           materia.isSelected = true;
         }
         if (e.correlativas.includes(materia.text)) {
-          materia.color = "green";
-          materia.bordercolor= "3px solid rgb(123, 194, 198)";
+          materia.backgroundImage = 'linear-gradient(0deg, #FFC312, #EE5A24, #00a8ff)';
         }
         if (materia.correlativas.includes(e.text)) {
           materia.color = "red";
@@ -65,7 +68,7 @@ export default function Plan() {
     var newDB = db;
     newDB.map((año) => {
       año.materias.map((materia) => {
-        materia.color = "rgba(48 ,58,68)";
+        materia.backgroundImage = 'linear-gradient(0deg, #FFC312, #EE5A24, #00a8ff)';
       });
     });
     setDb([...newDB]);
@@ -79,43 +82,54 @@ export default function Plan() {
   return (
     <>
       <div style={{
-                          backgroundColor:"rgba(48 ,58,68)",
-                        }}>
-        <p>Interactive plan</p>
-        <p>UNICEN</p>
-
+        backgroundColor: "rgb(1,1,1)"
+      }}>
+        { console.log(db)}
+       <Typography  className={classes.text} >
+            Interactive Plan 
+         </Typography>
         <div>
-          <ul>
-            {db.map((listitem) => (
-              <li className={classes.year} key={listitem.id}>
-                <Grid 
-                containerdirection="row"
-                justifyContent="center"
-                alignItems="center" >
-                <ul>
-                  {listitem.materias.map((s) => (
-                    <li className={classes.subject} key={s.id}>
-                      <Card
-                        className={classes.cardSubject}
-                        value="check"
-                        color="secondary"
-                        style={{
-                          backgroundColor: s.color,
-                        }}
-                        selected={s.isSelected}
-                        onClick={() => {
-                          selectSubject(s);
-                        }}
-                      >
-                        {s.text}
-                      </Card>
-                    </li>
-                  ))}
-                </ul>
-                </Grid>
-              </li>
-            ))}
-          </ul>
+          { 
+            db.map((listitem) => (
+            <Grid
+              className={classes.year}
+              key={listitem.id}
+              containerdirection="row"
+              justifyContent="center"
+              alignItems="center"
+              container spacing={2} columns={6}
+              >
+              { 
+                listitem.materias.map((s) => (
+                <Card
+                  className={classes.subject} key={s.id}
+                  className={classes.cardSubject}
+                  value="check"
+                  color="secondary"
+                  style={{
+                    backgroundColor: s.color,
+                  }}
+                  selected={s.isSelected}
+                  onClick={() => {
+                    selectSubject(s);
+                  }}
+                >
+                  <CardContent>
+                    <Typography
+                      className={classes.title}
+                      display="flex"
+                    >
+                      {s.text}
+                    </Typography>
+
+                    <Typography variant="body2" component="p" align="rigth" style={{ marginLeft: 110 }} className={classes.title}>
+                      Q
+                    </Typography>
+                  </CardContent>
+                </Card>
+              ))}
+            </Grid>
+          ))}
         </div>
       </div>
     </>
@@ -131,19 +145,31 @@ const useStyle = makeStyles((theme) => ({
   cardSubject: {
     width: "150px",
     height: "80px",
-    border: "3px solid rgba(123, 194, 198)",
-    backgroundColor :"rgba(48 ,58,68)",
+    marginLeft: "25px",
+    border: "4px solid rgba(1, 1, 1)",
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    backgroundSize: '200%',
+    borderRadius: 40,
+    backgroundImage: 'linear-gradient(45deg, #FFC312, #EE5A24, #00a8ff)',
+    '&:hover': {
+      backgroundPosition: 'right'
+    }
   },
   year: {
-    marginLeft: "auto",
-    marginRight: "auto",
-    listStyleType: "none",
-    paddingLeft: "0rem",
-    width: "100%",
-    margin:"10px",
-    background: " rgba(37, 77, 126)",
-
+    alignContent:"center",
+    background: "#3F51B5",
+    borderRadius: 10,
+    padding:"20px",
+    marginBottom:"40px",
+    marginTop:"40px",
   },
+  text :{
+    padding:"20px",
+    color:'rgb(255,255,255)'
+  },
+  title :{
+    color:'rgb(255,255,255)'
+  }
 }));
 
 /*
