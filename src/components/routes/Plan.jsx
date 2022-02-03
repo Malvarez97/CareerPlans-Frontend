@@ -51,7 +51,7 @@ export default function Plan() {
           materia.isSelected = true;
         }
         if (e.correlativas.includes(materia.text)) {
-          materia.color = "red";        }
+          materia.color = "green";        }
         if (materia.correlativas.includes(e.text)) {
           materia.color = "red";
         }
@@ -146,7 +146,6 @@ const useStyle = makeStyles((theme) => ({
     marginLeft: "25px",
     border: "4px solid rgba(1, 1, 1)",
     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-    backgroundSize: '200%',
     borderRadius: 40,
   },
   year: {
