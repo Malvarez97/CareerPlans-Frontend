@@ -5,7 +5,6 @@ import { getSubjects } from "../../services/SubjectService.js";
 import { getPlanById } from "../../services/PlanService.";
 import { addQuarter } from "../../services/PlanService.";
 import SaveIcon from '@mui/icons-material/Save';
-
 import ListSubjects from "./ListSubjects";
 import { Grid, IconButton, makeStyles, Paper } from "@material-ui/core";
 import axios from "axios";

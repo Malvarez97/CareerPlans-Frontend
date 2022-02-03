@@ -9,14 +9,13 @@ import Typography from '@mui/material/Typography';
 import CardContent from '@mui/material/CardContent';
 
 
-
-
 export default function Plan() {
   let history = useNavigate();
   const totalYears = 5;
   const years = [];
   const [db, setDb] = useState([]);
   const classes = useStyle();
+
 
   useEffect(async () => {
     var i;
@@ -52,8 +51,7 @@ export default function Plan() {
           materia.isSelected = true;
         }
         if (e.correlativas.includes(materia.text)) {
-          materia.backgroundImage = 'linear-gradient(0deg, #FFC312, #EE5A24, #00a8ff)';
-        }
+          materia.color = "red";        }
         if (materia.correlativas.includes(e.text)) {
           materia.color = "red";
         }
@@ -150,10 +148,6 @@ const useStyle = makeStyles((theme) => ({
     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
     backgroundSize: '200%',
     borderRadius: 40,
-    backgroundImage: 'linear-gradient(45deg, #FFC312, #EE5A24, #00a8ff)',
-    '&:hover': {
-      backgroundPosition: 'right'
-    }
   },
   year: {
     alignContent:"center",
