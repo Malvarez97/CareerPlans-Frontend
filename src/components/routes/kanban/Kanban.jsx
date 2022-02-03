@@ -8,7 +8,6 @@ import SaveIcon from '@mui/icons-material/Save';
 import ListSubjects from "./ListSubjects";
 import { Grid, IconButton, makeStyles, Paper } from "@material-ui/core";
 import axios from "axios";
-
 import Button from "@material-ui/core/Button";
 import AddIcon from "@mui/icons-material/Add";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -59,6 +58,8 @@ export default function App({}) {
   const [columns, setColumns] = useState([]);
   const [isModifed, setIsModifed] = useState(false);
   const { id } = useParams();
+  let dest ="/interactive-plan/"+ id.toString(); 
+  console.log(dest);
 
   useEffect(async () => {
     const plans = await getPlanById(id);
@@ -129,7 +130,8 @@ export default function App({}) {
         Save changes
       </Button>
       <Grid sx={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)" }}>
-        <Link className={classes.link} to="/interactive-plan" target={"_blank"}>
+        
+        <Link className={classes.link} to={dest} target={"_blank"}>
           <Button
             className={classes.button}
             variant="contained"
