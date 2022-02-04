@@ -15,8 +15,8 @@ export default function Header({}) {
       <div className={classes.nav}>
         <div className={classes.navItem}>
           <Button
-            variant="outlined"
-            style={{ color: "white" }}
+            variant="contained"
+            color ="secondary"
             startIcon={<LogoutIcon />}
           >
             <label style={{ fontSize: "0.8rem" }}>Log Out</label>
@@ -25,22 +25,11 @@ export default function Header({}) {
         <div className={classes.navItem}>
           <Link className={classes.link} to="/plans">
             <Button
-              variant="outlined"
-              style={{ color: "white" }}
+              variant="contained"
+              color ="secondary"
               startIcon={<ListAltIcon />}
             >
               <label style={{ fontSize: "0.8rem" }}>Plans</label>
-            </Button>
-          </Link>
-        </div>
-        <div className={classes.navItem}>
-          <Link className={classes.link} to="/plans/99">
-            <Button
-              variant="outlined"
-              style={{ color: "white" }}
-              startIcon={<DashboardIcon />}
-            >
-              <label style={{ fontSize: "0.8rem" }}>Kanban</label>
             </Button>
           </Link>
         </div>
@@ -63,7 +52,6 @@ const useStyle = makeStyles((theme) => ({
     padding: "0.8rem 0.1rem",
     width: "130px",
     fontSize: "0.5rem",
-    color: "white",
     float: "left",
     textDecoration: "none",
     background: ''

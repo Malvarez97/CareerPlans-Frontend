@@ -28,6 +28,7 @@ export default function Plan() {
       years.push(plan.data.years[i]);
     }
     const result = await getSubjects();
+    
     if (result.status === 200) {
       result.data.map((materia) => {
         years.map((año) => {
