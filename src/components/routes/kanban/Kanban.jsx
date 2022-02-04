@@ -58,7 +58,7 @@ export default function App({}) {
   const [columns, setColumns] = useState([]);
   const [isModifed, setIsModifed] = useState(false);
   const { id } = useParams();
-  let dest ="/interactive-plan/"+ id.toString(); 
+  let dest ="/interactive-plan/"+ id;
   console.log(dest);
 
   useEffect(async () => {

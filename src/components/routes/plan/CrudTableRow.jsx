@@ -25,12 +25,16 @@ export const CrudTableRow = ({ row }) => {
         </TableCell>
         <TableCell>{row.totalYears}</TableCell>
         <TableCell align="right">
+        <Link to={"/interactive-plan/"+row._id}>
         <IconButton className={classes.iconSee}>
             < VisibilityIcon/>
           </IconButton>
+          </Link>
+          <Link to ={"/plans/"+ row._id}>
           <IconButton className={classes.icon}>
             <EditIcon />
           </IconButton>
+          </Link>
           <IconButton
             className={classes.iconDelete}
             onClick={() => deletePlan(row._id)}
