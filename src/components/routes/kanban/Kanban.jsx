@@ -60,8 +60,10 @@ export default function App({}) {
   const { id } = useParams();
 
   useEffect(async () => {
-    const plans = await getPlanById(id);
-    setColumns([...plans.data.years]);
+    const plans = await getPlanById(id).then((response) => {
+      setColumns([...response.data.years]);
+      console.log("set columns");
+    });
   }, []);
 
   const saveChanges = async () => {
@@ -71,6 +73,7 @@ export default function App({}) {
 
   const addColumn = async () => {
     await addQuarter(id);
+    window.location.replace("");
   };
 
   return (
@@ -103,6 +106,8 @@ export default function App({}) {
                   column={column}
                   index={index}
                   id={id}
+                  setColumns={setColumns}
+                  columns={setColumns}
                 ></ListSubjects>
               </div>
             </div>

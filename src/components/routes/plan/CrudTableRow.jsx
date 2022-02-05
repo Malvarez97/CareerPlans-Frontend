@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import axios from "axios";
 import React from "react";
 import { IconButton, makeStyles } from "@material-ui/core";
 import ClearIcon from "@mui/icons-material/Clear";
@@ -7,7 +6,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { deletePlan } from "../../services/PlanService.";
-import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
 export const CrudTableRow = ({ row }) => {
   // usando la api de context puedo evitar el paso de las propiedades y hacerlas directamente (mejora)
@@ -25,9 +24,11 @@ export const CrudTableRow = ({ row }) => {
         </TableCell>
         <TableCell>{row.totalYears}</TableCell>
         <TableCell align="right">
-        <IconButton className={classes.iconSee}>
-            < VisibilityIcon/>
-          </IconButton>
+          <Link to={`/interactive-plan/${row._id}`} target={"_blank"}>
+            <IconButton className={classes.iconSee}>
+              <VisibilityIcon />
+            </IconButton>
+          </Link>
           <IconButton className={classes.icon}>
             <EditIcon />
           </IconButton>
@@ -37,7 +38,6 @@ export const CrudTableRow = ({ row }) => {
           >
             <ClearIcon />
           </IconButton>
-          
         </TableCell>
       </TableRow>
     </>
@@ -55,7 +55,7 @@ const useStyle = makeStyles((theme) => ({
       "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif",
     padding: theme.spacing(1, 1, 1, 1),
     display: "flex",
-    justifyContent: "inherit",
+    /* justifyContent: "inherit", */
     boxShadow: "0 1px 0 #091e4240",
     marginRight: "10px",
     color: "rgba(245, 0, 87)",

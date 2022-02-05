@@ -7,10 +7,11 @@ import { deleteSubject } from "../../services/PlanService.";
 import Card from "@mui/material/Card";
 import EditIcon from "@mui/icons-material/Edit";
 import ClearIcon from "@mui/icons-material/Clear";
+import { useParams } from "react-router-dom";
 
 export default function Subject({ item, index }) {
   const classes = useStyle();
-
+  const { id } = useParams();
   let history = useNavigate();
 
   const edit = (e) => {
@@ -26,7 +27,7 @@ export default function Subject({ item, index }) {
     console.log(e);
     const result = await deleteSubject(e.id);
 
-    history("../plans/99", { replace: true });
+    history("../plans/" + id, { replace: true });
   };
 
   return (

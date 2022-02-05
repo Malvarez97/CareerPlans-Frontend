@@ -33,7 +33,7 @@ export default function Header({}) {
             </Button>
           </Link>
         </div>
-        <div className={classes.navItem}>
+        {/*         <div className={classes.navItem}>
           <Link className={classes.link} to="/plans/99">
             <Button
               variant="outlined"
@@ -43,11 +43,11 @@ export default function Header({}) {
               <label style={{ fontSize: "0.8rem" }}>Kanban</label>
             </Button>
           </Link>
-        </div>
-        <div className={classes.navItem}>
+        </div> */}
+        {/*         <div className={classes.navItem}>
           <Link className={classes.link} to="/interactive-plan">
           </Link>
-        </div>
+        </div> */}
       </div>
     </>
   );
@@ -57,7 +57,7 @@ const useStyle = makeStyles((theme) => ({
   nav: {
     width: "100%",
     height: "60px",
-    background: 'rgba(63, 81, 181, 1.0)'
+    background: "rgba(63, 81, 181, 1.0)",
   },
   navItem: {
     padding: "0.8rem 0.1rem",
@@ -66,7 +66,7 @@ const useStyle = makeStyles((theme) => ({
     color: "white",
     float: "left",
     textDecoration: "none",
-    background: ''
+    background: "",
   },
   link: {
     textDecoration: "none",

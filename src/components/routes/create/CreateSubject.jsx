@@ -8,6 +8,8 @@ import { postSubject } from "../../services/SubjectService.js";
 import SelectSubjectComponent from "./SelectSubjectsComonent.jsx";
 import { useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { getPlanById } from "../../services/PlanService.";
+
 export default function CreateSubject({
   createData,
   updateData,
@@ -42,15 +44,20 @@ export default function CreateSubject({
 
     const result = await getSubjects();
     if (result.status === 200) {
-      result.data.map((materia) => {
+      const plan = await getPlanById(planId);
+
+      plan.data.years.map((year) => {
         years.map((año) => {
-          if (año.id === materia.year) {
-            año.materias.push({
-              _id: materia._id,
-              text: materia.name,
-              comment: "This is rad",
-              isSelected: false,
-              year: materia.year,
+          if (año.id === year.year) {
+            year.items.map((materia) => {
+              año.materias.push({
+                id: materia._id,
+                text: materia.name,
+                correlativas: materia.subjects,
+                isSelected: false,
+                year: materia.year,
+                color: "#389FB1",
+              });
             });
           }
         });
@@ -95,10 +102,10 @@ export default function CreateSubject({
 
     //todo validar plan id?
 
-    postSubject(newSubject, planId);
+    postSubject(newSubject, planId).then(
+      navigate(`../plans/${planId}`, { replace: true })
+    );
     //axios.post('http://localhost:4000/api/subjects', newSubject)
-
-    navigate(`../plans/${planId}`, { replace: true });
   };
 
   return (

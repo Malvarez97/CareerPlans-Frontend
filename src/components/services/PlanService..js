@@ -30,7 +30,10 @@ export async function deletePlan(id) {
     );
     if (isDeleted) {
       //const response = axios.delete("http://localhost:4000/api/plan/" + id); //TODO use in service
-      const response = axios.delete(`${baseUrl}/plan/${id}`);
+      const response = axios
+        .delete(`${baseUrl}/plan/${id}`)
+        .then(window.location.replace(""));
+
       return response;
     } else {
       return;

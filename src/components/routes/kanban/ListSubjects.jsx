@@ -8,13 +8,21 @@ import AddIcon from "@mui/icons-material/Add";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { deleteYear } from "../../services/PlanService.";
-export default function ListSubjects({ column, columnId, index, id }) {
+export default function ListSubjects({ column, columnId, index, id, data }) {
   const classes = useStyle();
   let history = useNavigate();
 
+  /*   useEffect(() => {
+    if (props.xyz) {
+      setAbc((abc) => abc.filter((key) => key.id === props.xyz));
+    }
+  }, [props.xyz]); */
+
   const handleDelete = async (e) => {
     console.log(e);
-    const response = await deleteYear(id, e.year);
+    const response = await deleteYear(id, e.year).then(
+      window.location.replace("")
+    );
   };
 
   return (
@@ -41,7 +49,6 @@ export default function ListSubjects({ column, columnId, index, id }) {
               id=""
               style={{
                 display: "flex",
-
                 alignItems: "center",
                 width: "80%",
               }}

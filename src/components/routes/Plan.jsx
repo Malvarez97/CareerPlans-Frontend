@@ -7,11 +7,13 @@ import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import { color } from "@mui/system";
 import { useParams } from "react-router-dom";
+import Button from "@mui/material/Button";
 
 export default function Plan() {
   let history = useNavigate();
   const totalYears = 5;
   const years = [];
+  const years2 = [];
   const [db, setDb] = useState([]);
   const classes = useStyle();
   const { id } = useParams();
@@ -22,24 +24,31 @@ export default function Plan() {
       years.push({ id: i, materias: [] });
     }
 
+    /*     var j;
+    for (j = 0; j <= totalYears; i++) {
+      years2.push({ id: j, materias: [] });
+    } */
+
     const result = await getSubjects();
     if (result.status === 200) {
-      result.data.map((materia) => {
+      console.log("id = " + id);
+      const plan = await getPlanById(id);
+
+      plan.data.years.map((year) => {
         years.map((año) => {
-          if (año.id === materia.year) {
-            año.materias.push({
-              id: materia._id,
-              text: materia.name,
-              correlativas: materia.subjects,
-              isSelected: false,
-              color: "#389FB1",
+          if (año.id === year.year) {
+            year.items.map((materia) => {
+              año.materias.push({
+                id: materia._id,
+                text: materia.name,
+                correlativas: materia.subjects,
+                isSelected: false,
+                color: "#389FB1",
+              });
             });
           }
         });
       });
-
-      console.log("id" + id);
-      const plan = await getPlanById(id);
 
       console.log("years");
       console.log(years);
@@ -56,6 +65,7 @@ export default function Plan() {
       año.materias.map((materia) => {
         if (materia.text === e.text) {
           materia.isSelected = true;
+          materia.color = "rgba(0,255,200,1)"; //green
         }
         if (e.correlativas.includes(materia.text)) {
           materia.color = "rgb(70, 252, 70)"; //green
