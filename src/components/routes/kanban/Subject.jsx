@@ -25,7 +25,7 @@ export default function Subject({ item, index }) {
 
   const removeSubject = async (e) => {
     console.log(e);
-    const result = await deleteSubject(e.id);
+    const result = await deleteSubject(id, e._id);
 
     history("../plans/" + id, { replace: true });
   };

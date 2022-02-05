@@ -83,14 +83,15 @@ export async function removeQuarter(id) {
 }
 
 //TODO hacer de nuevo, eliminar desde arreglo plan
-export async function deleteSubject(id) {
+export async function deleteSubject(planId, subjectId) {
   try {
     let isDeleted = window.confirm(
-      `¿Estas seguro de eliminar el registro con el id ${id} ?`
+      `¿Estas seguro de eliminar el registro con el id ${subjectId} ?`
     );
     if (isDeleted) {
-      //const response = axios.delete('http://localhost:4000/api/subjects/' + id)
-      const response = "";
+      const response = axios.put(
+        `${baseUrl}/plan/remove-subject/${planId}/${subjectId}`
+      );
       return response;
     } else {
       return;
