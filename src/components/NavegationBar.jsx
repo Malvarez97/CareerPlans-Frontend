@@ -10,7 +10,7 @@ export default function NavegationBar({ db, setDb }) {
   return (
     <div className="mt-5" style={{ minHeigth: "1200px" }}>
       <Routes>
-        <Route path="/interactive-plan" element={<Plan />} />
+        <Route path="/interactive-plan/:id" element={<Plan />} />
         <Route path="/plans/:id" element={<Kanban data={db} />} />
         <Route path="/" element={<Kanban data={db} />} />
         <Route path="/create-subject" element={<CreateSubject />} />
