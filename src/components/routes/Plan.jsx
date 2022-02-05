@@ -1,34 +1,26 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate ,useParams} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getSubjects } from "../services/SubjectService.js";
 import { makeStyles } from "@material-ui/core";
 import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
 import { color } from "@mui/system";
-import Typography from '@mui/material/Typography';
-import CardContent from '@mui/material/CardContent';
-import { getPlanById } from "../../components/services/PlanService.";
-
 
 
 export default function Plan() {
   let history = useNavigate();
-  const { id } = useParams();
-  const totalYears =1;
+  const totalYears = 5;
+  const years = [];
   const [db, setDb] = useState([]);
-  const [years, setColumns] = useState([]);
   const classes = useStyle();
 
-
   useEffect(async () => {
-    const plan = await getPlanById(id);
-    setColumns([...plan.data.years]);
     var i;
-    for (i = 0; i <= plan.data.years.length-1; i++) {
-      years.push(plan.data.years[i]);
+    for (i = 0; i <= totalYears; i++) {
+      years.push({ id: i, materias: [] });
     }
+
     const result = await getSubjects();
-    
     if (result.status === 200) {
       result.data.map((materia) => {
         years.map((año) => {
@@ -56,7 +48,9 @@ export default function Plan() {
           materia.isSelected = true;
         }
         if (e.correlativas.includes(materia.text)) {
-          materia.color = "green";        }
+          materia.color = "green";
+          materia.bordercolor= "3px solid rgb(123, 194, 198)";
+        }
         if (materia.correlativas.includes(e.text)) {
           materia.color = "red";
         }
@@ -68,10 +62,10 @@ export default function Plan() {
 
   const resetSubjects = (e) => {
     //TODO hay una forma mas linda de hacer esto
-    var newDB = years;
+    var newDB = db;
     newDB.map((año) => {
       año.materias.map((materia) => {
-        materia.color = "blue";
+        materia.color = "rgba(48 ,58,68)";
       });
     });
     setDb([...newDB]);
@@ -85,55 +79,43 @@ export default function Plan() {
   return (
     <>
       <div style={{
-        backgroundColor: "rgb(1,1,1)"
-      }}>
-        
-       <Typography  className={classes.text} >
-            Interactive Plan 
-         </Typography>
-        <div>
-          { 
-            years.map((listitem) => (
-            <Grid
-              className={classes.year}
-              key={listitem.id}
-              containerdirection="row"
-              justifyContent="center"
-              alignItems="center"
-              container spacing={2} columns={6}
-              >
-              { 
-                listitem.items.map((s) => (
-                <Card
-                  className={classes.subject} key={s.id}
-                  className={classes.cardSubject}
-                  value="check"
-                  color="secondary"
-                  style={{
-                    backgroundColor: s.color,
-                  }}
-                  selected={s.isSelected}
-                  onClick={() => {
-                    selectSubject(s);
-                  }}
-                > 
-                  <CardContent>
-                    <Typography
-                      className={classes.title}
-                      display="flex"
-                    >
-                      {
-                        s.name } 
-                    </Typography>
+                          backgroundColor:"rgba(48 ,58,68)",
+                        }}>
+        <p>Interactive plan</p>
+        <p>UNICEN</p>
 
-                    <Typography variant="body2" component="p" align="rigth" style={{ marginLeft: 110 }} className={classes.title}>
-                      Q
-                    </Typography>
-                  </CardContent>
-                </Card>
-              ))}
-            </Grid>
-          ))}
+        <div>
+          <ul>
+            {db.map((listitem) => (
+              <li className={classes.year} key={listitem.id}>
+                <Grid 
+                containerdirection="row"
+                justifyContent="center"
+                alignItems="center" >
+                <ul>
+                  {listitem.materias.map((s) => (
+                    <li className={classes.subject} key={s.id}>
+                      <Card
+                        className={classes.cardSubject}
+                        value="check"
+                        color="secondary"
+                        style={{
+                          backgroundColor: s.color,
+                        }}
+                        selected={s.isSelected}
+                        onClick={() => {
+                          selectSubject(s);
+                        }}
+                      >
+                        {s.text}
+                      </Card>
+                    </li>
+                  ))}
+                </ul>
+                </Grid>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </>
@@ -149,27 +131,19 @@ const useStyle = makeStyles((theme) => ({
   cardSubject: {
     width: "150px",
     height: "80px",
-    marginLeft: "25px",
-    border: "4px solid rgba(1, 1, 1)",
-    backgroundcolor:"blue",
-    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-    borderRadius: 40,
+    border: "3px solid rgba(123, 194, 198)",
+    backgroundColor :"rgba(48 ,58,68)",
   },
   year: {
-    alignContent:"center",
-    background: "#3F51B5",
-    borderRadius: 10,
-    padding:"20px",
-    marginBottom:"40px",
-    marginTop:"40px",
+    marginLeft: "auto",
+    marginRight: "auto",
+    listStyleType: "none",
+    paddingLeft: "0rem",
+    width: "100%",
+    margin:"10px",
+    background: " rgba(37, 77, 126)",
+
   },
-  text :{
-    padding:"20px",
-    color:'rgb(255,255,255)'
-  },
-  title :{
-    color:'rgb(1,255,255)'
-  }
 }));
 
 /*
