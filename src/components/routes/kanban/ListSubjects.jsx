@@ -100,8 +100,12 @@ const useStyle = makeStyles((theme) => ({
     textAlign: "center",
     height: 50,
     width: 50,
-
+    marginRight: "10px",
     color: "black",
+    "&:hover, &:focus": {
+      background: "#ef4c4c",
+      color: "black",
+    },
   },
   buttonAdd: {
     textAlign: "center",

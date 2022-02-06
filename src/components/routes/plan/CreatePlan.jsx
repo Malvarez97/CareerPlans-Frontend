@@ -4,6 +4,7 @@ import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import Button from "@mui/material/Button";
 import { postPlan } from "../../services/PlanService.";
 import SaveIcon from "@mui/icons-material/Save";
+import { SnackbarData } from "../../SnackbarData";
 
 const initialForm = {
   id: null,
@@ -41,6 +42,14 @@ export default function CreatePlan({
     console.log("submitieando");
     const response = postPlan(initialForm);
     console.log(response);
+
+    const snackData = new SnackbarData("Plan created succesfully! ", "success");
+    document.dispatchEvent(
+      new CustomEvent("snackMessage", {
+        detail: { snackData },
+      })
+    );
+
     navigate("../plans", { replace: true });
   };
 

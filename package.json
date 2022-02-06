@@ -18,6 +18,7 @@
     "ejs": "^3.1.5",
     "eslint": "^8.8.0",
     "express": "4.17.2",
+    "notistack": "^2.0.3",
     "react": "^17.0.2",
     "react-beautiful-dnd": "^13.1.0",
     "react-dom": "^17.0.2",
@@ -56,6 +57,11 @@
     ]
   },
   "devDependencies": {
-    "dotenv": "^11.0.0"
+    "@types/jest": "^27.4.0",
+    "@types/node": "^17.0.15",
+    "@types/react": "^17.0.39",
+    "@types/react-dom": "^17.0.11",
+    "dotenv": "^11.0.0",
+    "typescript": "^4.5.5"
   }
 }

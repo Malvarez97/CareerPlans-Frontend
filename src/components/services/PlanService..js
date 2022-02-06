@@ -118,3 +118,12 @@ export async function deleteYear(id, year) {
     console.log(e);
   }
 }
+
+export async function updatePlan(id, plan) {
+  try {
+    const response = axios.put(`${baseUrl}/plan/${id}`, plan);
+    return response;
+  } catch (e) {
+    console.log(e);
+  }
+}

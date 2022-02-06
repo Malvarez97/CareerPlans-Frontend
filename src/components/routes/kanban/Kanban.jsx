@@ -3,6 +3,7 @@ import { DragDropContext } from "react-beautiful-dnd";
 import { Link } from "react-router-dom";
 import { getSubjects } from "../../services/SubjectService.js";
 import { getPlanById } from "../../services/PlanService.";
+import { updatePlan } from "../../services/PlanService.";
 import { addQuarter } from "../../services/PlanService.";
 import SaveIcon from "@mui/icons-material/Save";
 import ListSubjects from "./ListSubjects";
@@ -12,6 +13,7 @@ import Button from "@material-ui/core/Button";
 import AddIcon from "@mui/icons-material/Add";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useParams } from "react-router-dom";
+import { SnackbarData } from "../../SnackbarData";
 
 const onDragEnd = (result, columns, setColumns, setIsModifed) => {
   setIsModifed(true);
@@ -58,17 +60,39 @@ export default function App({}) {
   const [columns, setColumns] = useState([]);
   const [isModifed, setIsModifed] = useState(false);
   const { id } = useParams();
+  const [currentPlan, setCurrentPlan] = useState();
 
   useEffect(async () => {
-    const plans = await getPlanById(id).then((response) => {
+    const plan = await getPlanById(id).then((response) => {
       setColumns([...response.data.years]);
+      setCurrentPlan(response.data);
       console.log("set columns");
     });
   }, []);
 
   const saveChanges = async () => {
-    console.log("Subjects to save");
-    console.log(columns);
+    currentPlan.years = columns;
+    const response = await updatePlan(id, currentPlan);
+
+    setIsModifed(false);
+    if (response.status == 200) {
+      const snackData = new SnackbarData(
+        "Plan updated succesfully! ",
+        "success"
+      );
+      document.dispatchEvent(
+        new CustomEvent("snackMessage", {
+          detail: { snackData },
+        })
+      );
+    } else {
+      const snackData = new SnackbarData("Error in plan update ", "error");
+      document.dispatchEvent(
+        new CustomEvent("snackMessage", {
+          detail: { snackData },
+        })
+      );
+    }
   };
 
   const addColumn = async () => {
@@ -85,7 +109,9 @@ export default function App({}) {
         height: "100%",
       }}
     >
-      <label>Study Plan Unicen Exactas</label>
+      <label style={{ fontSize: "2rem" }}>
+        {currentPlan?.name.toUpperCase()}
+      </label>
       <DragDropContext
         onDragEnd={(result) =>
           onDragEnd(result, columns, setColumns, setIsModifed)
