@@ -5,15 +5,12 @@ import { getPlanById } from "../services/PlanService.";
 import { makeStyles } from "@material-ui/core";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
-import { color } from "@mui/system";
 import { useParams } from "react-router-dom";
-import Button from "@mui/material/Button";
 
 export default function Plan() {
   let history = useNavigate();
   const totalYears = 5;
   const years = [];
-  const years2 = [];
   const [db, setDb] = useState([]);
   const classes = useStyle();
   const { id } = useParams();
@@ -150,7 +147,7 @@ const useStyle = makeStyles((theme) => ({
   cardSubject: {
     width: "150px",
     height: "80px",
-    /*  border: "3px solid rgba(123, 194, 198)", */
+    border: "3px solid rgba(1, 1, 1)", 
     backgroundColor: "white",
   },
   year: {

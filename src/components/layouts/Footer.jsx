@@ -1,8 +1,4 @@
-import { Grid, IconButton, makeStyles, Paper } from "@material-ui/core";
-import { Link } from "react-router-dom";
-import Button from "@material-ui/core/Button";
-import AddIcon from "@mui/icons-material/Add";
-import VisibilityIcon from "@mui/icons-material/Visibility";
+import { makeStyles } from "@material-ui/core";
 import "./footer.css";
 
 export default function Footer({}) {
