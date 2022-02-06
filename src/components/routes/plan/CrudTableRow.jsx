@@ -29,9 +29,11 @@ export const CrudTableRow = ({ row }) => {
               <VisibilityIcon />
             </IconButton>
           </Link>
+          <Link to={`/plans/${row._id}`}>
           <IconButton className={classes.icon}>
             <EditIcon />
-          </IconButton>
+          </IconButton> 
+          </Link>
           <IconButton
             className={classes.iconDelete}
             onClick={() => deletePlan(row._id)}

@@ -14,13 +14,11 @@ export default function Header({}) {
     <>
       <div className={classes.nav}>
         <div className={classes.navItem}>
-          <Button
-            variant="outlined"
-            style={{ color: "white" }}
-            startIcon={<LogoutIcon />}
-          >
-            <label style={{ fontSize: "0.8rem" }}>Log Out</label>
-          </Button>
+        <div >
+        <h3>
+            Interactive<span className={classes.span}>Plan</span>
+        </h3> 
+        </div>
         </div>
         <div className={classes.navItem}>
           <Link className={classes.link} to="/plans">
@@ -67,8 +65,12 @@ const useStyle = makeStyles((theme) => ({
     float: "left",
     textDecoration: "none",
     background: "",
+    marginLeft:"80px",
   },
   link: {
     textDecoration: "none",
   },
+  span :{
+    color: "lightseagreen"
+  }
 }));
