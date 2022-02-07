@@ -52,7 +52,7 @@ const useStyle = makeStyles((theme) => ({
   },
   footer: {
     padding: "2rem",
-    backgroundColor: "#d5dde6",
+    backgroundColor: "rgba(63, 81, 181, 1.0)",
     marginTop: "5rem",
     bottom: "0",
 
