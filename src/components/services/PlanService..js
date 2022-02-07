@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = process.env.REACT_APP_BASE_URL;
+const baseUrl = /*process.env.REACT_APP_BASE_URL*/"https://carrers-plan-back.herokuapp.com/api";
 
 export async function getPlans() {
   try {

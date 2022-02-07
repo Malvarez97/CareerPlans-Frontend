@@ -31,8 +31,6 @@ export default function App() {
   return (
     <div className={classes.App}>
       <AppContainer db={db} setDb={setDb} />
-
-
     </div>
 
   );
