@@ -62,6 +62,7 @@ export default function App({}) {
   const { id } = useParams();
   const [currentPlan, setCurrentPlan] = useState();
 
+
   useEffect(async () => {
     const plan = await getPlanById(id).then((response) => {
       setColumns([...response.data.years]);

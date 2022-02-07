@@ -1,5 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 import "./footer.css";
+import logo from '../resources/unicen.png';
 
 export default function Footer({}) {
   const classes = useStyle();
@@ -11,11 +12,13 @@ export default function Footer({}) {
           <h3>
             Interactive<span>Plan</span>
           </h3>
+          <img src={logo} width="250" heigth="100"/> 
         </div>
         <div className="footer-center">
           <div>
             <i className="fa fa-map-marker"></i>
             <p>
+               <span>Integrantes</span> 
               <span>Alvarez, Mauricio Ezequiel</span> 
               <span>Osignaga, Lautaro</span> 
             </p>

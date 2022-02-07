@@ -16,6 +16,7 @@ export default function NavegationBar({ db, setDb }) {
         <Route path="/create-subject" element={<CreateSubject />} />
         <Route path="/plans" element={<CrudTable data={db} />} />
         <Route path="/create-plan" element={<CreatePlan data={db} />} />
+        <Route path="/edit-subject/:id" element={<CreateSubject data={db} />} />
       </Routes>
     </div>
   );

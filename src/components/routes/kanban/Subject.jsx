@@ -2,20 +2,30 @@ import { IconButton, makeStyles, Paper } from "@material-ui/core";
 import { Draggable } from "react-beautiful-dnd";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-import { deleteSubject } from "../../services/PlanService.";
+import { deleteSubject, getPlanById } from "../../services/PlanService.";
 import Card from "@mui/material/Card";
 import EditIcon from "@mui/icons-material/Edit";
 import ClearIcon from "@mui/icons-material/Clear";
 import { useParams } from "react-router-dom";
+import { getSubjects } from "../../services/SubjectService";
 
 export default function Subject({ item, index }) {
   const classes = useStyle();
   const { id } = useParams();
   let history = useNavigate();
+  const[changes,setChangesOpen]= useState(false);
 
-  const edit = (e) => {
-    history("../create-subject", { card: e });
+  const setChanges = () =>{
+    setChangesOpen(true);
+    console.log("changes se volvio true")
+    return;
+  }
+
+  const edit = async (e) => {
+    /*setChanges();
+    console.log(item._id );
+    history("../edit-subject/"+item._id, { 
+      card: e });*/
   };
 
   const goToPreviousPath = (e) => {

@@ -17,7 +17,7 @@ export default function CardOption({ s, name, db, setDb }) {
 
     setDb([...newDB]);
   };
-
+  
   return (
     <>
       <div>

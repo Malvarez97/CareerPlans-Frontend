@@ -14,6 +14,19 @@ export async function getPlans() {
   }
 }
 
+
+export async function getSubject(id) {
+  try {
+    const response = await axios({
+      url: `${baseUrl}/subject`+id,
+      method: "GET",
+    });
+    return response;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 export async function postPlan(data) {
   try {
     const response = axios.post(`${baseUrl}/plan`, data);

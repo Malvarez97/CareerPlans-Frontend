@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import Button from "@mui/material/Button";
 import "./StylesCustom.css";
-import { getSubjects } from "../../services/SubjectService.js";
-import { postSubject } from "../../services/SubjectService.js";
+import { postSubject} from "../../services/SubjectService.js";
 import SelectSubjectComponent from "./SelectSubjectsComonent.jsx";
 import { useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { getPlanById } from "../../services/PlanService.";
+
 
 export default function CreateSubject({
   createData,
@@ -20,10 +20,12 @@ export default function CreateSubject({
   let history = useNavigate();
 
   const search = useLocation().search;
+ 
+
 
   const year = new URLSearchParams(search).get("year");
   const planId = new URLSearchParams(search).get("planId");
-
+  const {id} =useParams();
   const initialForm = {
     id: null,
     name: "",
@@ -36,14 +38,15 @@ export default function CreateSubject({
   const totalYears = 5;
   const years = [];
 
+
+  
+ 
   useEffect(async () => {
     var i;
     for (i = 1; i <= totalYears; i++) {
       years.push({ id: i, materias: [] });
     }
 
-    const result = await getSubjects();
-    if (result.status === 200) {
       const plan = await getPlanById(planId);
 
       plan.data.years.map((year) => {
@@ -65,7 +68,7 @@ export default function CreateSubject({
 
       setDb([...years]);
     }
-  }, []);
+  , []);
 
   const handleChange = (e) => {
     const { name, value, checked, type } = e.target;
@@ -107,11 +110,10 @@ export default function CreateSubject({
     );
     //axios.post('http://localhost:4000/api/subjects', newSubject)
   };
-
   return (
     <>
       <div className="container md-5">
-        <h3>{dataToEdit ? "Edit" : "Create subject"}</h3>
+        <h3>{id===undefined ? "Create subject" :"Edit Subject"}</h3>
 
         <form>
           {/*  onSubmit={handleSubmit}  TODO*/}
