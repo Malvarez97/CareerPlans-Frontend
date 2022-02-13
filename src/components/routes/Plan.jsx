@@ -6,25 +6,22 @@ import { makeStyles } from "@material-ui/core";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export default function Plan() {
-  let history = useNavigate();
   const totalYears = 5;
   const years = [];
   const [db, setDb] = useState([]);
   const classes = useStyle();
   const { id } = useParams();
+  const search = useLocation().search;
+  const name = new URLSearchParams(search).get("name");
 
   useEffect(async () => {
     var i;
     for (i = 0; i <= totalYears; i++) {
       years.push({ id: i, materias: [] });
     }
-
-    /*     var j;
-    for (j = 0; j <= totalYears; i++) {
-      years2.push({ id: j, materias: [] });
-    } */
 
     const result = await getSubjects();
     if (result.status === 200) {
@@ -47,10 +44,6 @@ export default function Plan() {
         });
       });
 
-      console.log("years");
-      console.log(years);
-      console.log("plan");
-      console.log(plan.data.years);
       setDb([...years]);
     }
   }, []);
@@ -88,17 +81,10 @@ export default function Plan() {
     setDb([...newDB]);
   };
 
-  const goToPreviousPath = (e) => {
-    e.preventDefault();
-    history(-1);
-  };
-
   return (
     <>
       <div>
-        <p>Interactive plan</p>
-        <p>UNICEN</p>
-
+        <p>{name}</p>
         <div>
           <ul>
             {db.map((listitem) => (
@@ -147,7 +133,7 @@ const useStyle = makeStyles((theme) => ({
   cardSubject: {
     width: "150px",
     height: "80px",
-    border: "3px solid rgba(1, 1, 1)", 
+
     backgroundColor: "white",
   },
   year: {

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = /*process.env.REACT_APP_BASE_URL*/"https://carrers-plan-back.herokuapp.com/api";
+const baseUrl = process.env.REACT_APP_BASE_URL;
 
 export async function getPlans() {
   try {
@@ -14,11 +14,10 @@ export async function getPlans() {
   }
 }
 
-
 export async function getSubject(id) {
   try {
     const response = await axios({
-      url: `${baseUrl}/subject`+id,
+      url: `${baseUrl}/subject` + id,
       method: "GET",
     });
     return response;
@@ -42,7 +41,6 @@ export async function deletePlan(id) {
       `¿Estas seguro de eliminar el plan con el id ${id} ?`
     );
     if (isDeleted) {
-      //const response = axios.delete("http://localhost:4000/api/plan/" + id); //TODO use in service
       const response = axios
         .delete(`${baseUrl}/plan/${id}`)
         .then(window.location.replace(""));
@@ -117,12 +115,13 @@ export async function deleteSubject(planId, subjectId) {
 export async function deleteYear(id, year) {
   try {
     let isDeleted = window.confirm(
-      `¿Estas seguro de eliminar el registro con el id ${id} ?`
+      `¿Are you sure you want to delete the quarter with id ${id} ?`
     );
     if (isDeleted) {
       const response = axios.delete(
         `${baseUrl}/plan/remove-quarter/${id}/${year}`
       );
+      console.log(response);
       return response;
     } else {
       return;
@@ -135,6 +134,17 @@ export async function deleteYear(id, year) {
 export async function updatePlan(id, plan) {
   try {
     const response = axios.put(`${baseUrl}/plan/${id}`, plan);
+    return response;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export async function findSubjectById(plan, id) {
+  try {
+    //const response = axios.get(`${baseUrl}/plan/${plan}/${id}`);
+    const response = axios.get(`${baseUrl}/plan/${plan}/${id}`);
+
     return response;
   } catch (e) {
     console.log(e);

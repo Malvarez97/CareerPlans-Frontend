@@ -8,20 +8,22 @@ import AddIcon from "@mui/icons-material/Add";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { deleteYear } from "../../services/PlanService.";
+import { SnackbarData } from "../../SnackbarData";
+
 export default function ListSubjects({ column, columnId, index, id, data }) {
   const classes = useStyle();
   let history = useNavigate();
 
-  /*   useEffect(() => {
-    if (props.xyz) {
-      setAbc((abc) => abc.filter((key) => key.id === props.xyz));
-    }
-  }, [props.xyz]); */
-
   const handleDelete = async (e) => {
     console.log(e);
+
+    const snackData = new SnackbarData("Plan updated succesfully! ", "success");
     const response = await deleteYear(id, e.year).then(
-      window.location.replace("")
+      document.dispatchEvent(
+        new CustomEvent("snackMessage", {
+          detail: { snackData },
+        })
+      )
     );
   };
 
@@ -120,5 +122,3 @@ const useStyle = makeStyles((theme) => ({
     textDecoration: "none",
   },
 }));
-
-//#ebecf0

@@ -8,24 +8,29 @@ import EditIcon from "@mui/icons-material/Edit";
 import ClearIcon from "@mui/icons-material/Clear";
 import { useParams } from "react-router-dom";
 import { getSubjects } from "../../services/SubjectService";
+import { SnackbarData } from "../../SnackbarData";
 
 export default function Subject({ item, index }) {
   const classes = useStyle();
   const { id } = useParams();
+  let navigate = useNavigate();
   let history = useNavigate();
-  const[changes,setChangesOpen]= useState(false);
+  const [changes, setChangesOpen] = useState(false);
 
-  const setChanges = () =>{
+  const setChanges = () => {
     setChangesOpen(true);
-    console.log("changes se volvio true")
+    console.log("changes se volvio true");
     return;
-  }
+  };
 
   const edit = async (e) => {
-    /*setChanges();
-    console.log(item._id );
-    history("../edit-subject/"+item._id, { 
-      card: e });*/
+    setChanges();
+    //to={`/interactive-plan/${id}?name=${currentPlan?.name}`}
+    console.log(item._id);
+    navigate(`/edit-subject?planId=${id}&subject=${item._id}`);
+    /*     history("../edit-subject/" + item._id, {
+      card: e,
+    }); */
   };
 
   const goToPreviousPath = (e) => {
@@ -35,8 +40,18 @@ export default function Subject({ item, index }) {
 
   const removeSubject = async (e) => {
     console.log(e);
-    const result = await deleteSubject(id, e._id);
-
+    const response = await deleteSubject(id, e._id);
+    if (response.status == 200) {
+      const snackData = new SnackbarData(
+        "Subject deleted succesfully! ",
+        "success"
+      );
+      document.dispatchEvent(
+        new CustomEvent("snackMessage", {
+          detail: { snackData },
+        })
+      );
+    }
     history("../plans/" + id, { replace: true });
   };
 
@@ -83,7 +98,6 @@ const useStyle = makeStyles((theme) => ({
     padding: theme.spacing(1, 1, 1, 1),
     display: "flex",
 
-    boxShadow: "0 1px 0 #091e4240",
     marginRight: "10px",
     color: "rgba(245, 0, 87)",
     "&:hover, &:focus": {

@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 import "./footer.css";
-import logo from '../resources/unicen.png';
+import logo from "../resources/unicen.png";
 
 export default function Footer({}) {
   const classes = useStyle();
@@ -12,23 +12,24 @@ export default function Footer({}) {
           <h3>
             Interactive<span>Plan</span>
           </h3>
-          <img src={logo} width="250" heigth="100"/> 
+          <img src={logo} width="250" heigth="100" />
         </div>
         <div className="footer-center">
           <div>
             <i className="fa fa-map-marker"></i>
             <p>
-               <span>Integrantes</span> 
-              <span>Alvarez, Mauricio Ezequiel</span> 
-              <span>Osignaga, Lautaro</span> 
+              <span>Integrantes: </span>
+              <span> - Alvarez, Mauricio Ezequiel</span>
+              <span> - Osinaga, Lautaro</span>
             </p>
           </div>
         </div>
 
         <div className="footer-right">
           <p className="footer-company-about">
-            <span>Trabajo Final Programacion Web </span>
-           Plan interactivo de materias para el trabajo final de Programacion Web 
+            <span>Final Project Web - Programming</span>
+            Interactive plan of subjects for the final project of Web
+            Programming
           </p>
         </div>
       </footer>

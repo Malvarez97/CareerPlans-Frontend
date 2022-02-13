@@ -62,7 +62,6 @@ export default function App({}) {
   const { id } = useParams();
   const [currentPlan, setCurrentPlan] = useState();
 
-
   useEffect(async () => {
     const plan = await getPlanById(id).then((response) => {
       setColumns([...response.data.years]);
@@ -163,8 +162,9 @@ export default function App({}) {
         {/*`¿Estas seguro de eliminar el plan con el id ${id} ?` */}
         <Link
           className={classes.link}
-          to={`/interactive-plan/${id}`}
+          to={`/interactive-plan/${id}?name=${currentPlan?.name}`}
           target={"_blank"}
+          //to={`/create-subject?planId=${id}&year=${column.year}`}
         >
           <Button
             className={classes.button}

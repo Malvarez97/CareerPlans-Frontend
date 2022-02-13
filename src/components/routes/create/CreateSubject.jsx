@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import Button from "@mui/material/Button";
 import "./StylesCustom.css";
-import { postSubject} from "../../services/SubjectService.js";
+import { postSubject } from "../../services/SubjectService.js";
 import SelectSubjectComponent from "./SelectSubjectsComonent.jsx";
 import { useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { getPlanById } from "../../services/PlanService.";
-
+import { findSubjectById } from "../../services/PlanService.";
 
 export default function CreateSubject({
   createData,
@@ -20,12 +20,12 @@ export default function CreateSubject({
   let history = useNavigate();
 
   const search = useLocation().search;
- 
-
 
   const year = new URLSearchParams(search).get("year");
   const planId = new URLSearchParams(search).get("planId");
-  const {id} =useParams();
+  const subject = new URLSearchParams(search).get("subject");
+  const { id } = useParams();
+
   const initialForm = {
     id: null,
     name: "",
@@ -38,37 +38,52 @@ export default function CreateSubject({
   const totalYears = 5;
   const years = [];
 
-
-  
- 
   useEffect(async () => {
+    console.log("subjectId");
+    console.log(subject);
+
+    let subjectDB;
+    //
+    if (subject != null) {
+      subjectDB = await findSubjectById(planId, subject);
+      console.log("subjectDB");
+      console.log(subjectDB.data);
+      const initialFor2 = {
+        id: subjectDB.data._id,
+        name: subjectDB.data.name,
+        year: subjectDB.data.year,
+        quarter: 1,
+      };
+      setTodo(initialFor2);
+    }
+
     var i;
     for (i = 1; i <= totalYears; i++) {
       years.push({ id: i, materias: [] });
     }
 
-      const plan = await getPlanById(planId);
+    const plan = await getPlanById(planId);
 
-      plan.data.years.map((year) => {
-        years.map((año) => {
-          if (año.id === year.year) {
-            year.items.map((materia) => {
-              año.materias.push({
-                id: materia._id,
-                text: materia.name,
-                correlativas: materia.subjects,
-                isSelected: false,
-                year: materia.year,
-                color: "#389FB1",
-              });
+    plan.data.years.map((year) => {
+      years.map((año) => {
+        if (año.id === year.year) {
+          year.items.map((materia) => {
+            año.materias.push({
+              id: materia._id,
+              text: materia.name,
+              correlativas: materia.subjects,
+              isSelected: false,
+              //subjectDB?.data.subjects.includes(materia.name) ? true : false,
+              year: materia.year,
+              color: "#389FB1",
             });
-          }
-        });
+          });
+        }
       });
+    });
 
-      setDb([...years]);
-    }
-  , []);
+    setDb([...years]);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, checked, type } = e.target;
@@ -113,7 +128,7 @@ export default function CreateSubject({
   return (
     <>
       <div className="container md-5">
-        <h3>{id===undefined ? "Create subject" :"Edit Subject"}</h3>
+        <h3>{id === undefined ? "Create subject" : "Edit Subject"}</h3>
 
         <form>
           {/*  onSubmit={handleSubmit}  TODO*/}
