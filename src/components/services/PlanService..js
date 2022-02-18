@@ -42,8 +42,7 @@ export async function deletePlan(id) {
     );
     if (isDeleted) {
       const response = axios
-        .delete(`${baseUrl}/plan/${id}`)
-        .then(window.location.replace(""));
+        .delete(`${baseUrl}/plan/${id}`);
 
       return response;
     } else {
@@ -121,7 +120,7 @@ export async function deleteYear(id, year) {
       const response = axios.delete(
         `${baseUrl}/plan/remove-quarter/${id}/${year}`
       );
-      console.log(response);
+
       return response;
     } else {
       return;

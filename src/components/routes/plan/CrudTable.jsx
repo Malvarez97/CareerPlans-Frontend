@@ -19,13 +19,22 @@ import { makeStyles, Button } from "@material-ui/core";
 function CrudTable({}) {
   const [db, setDb] = useState([]);
   const classes = useStyle();
+  const [lastUpdateTimestamp, setLastUpdateTimestamp] = useState(
+    new Date().getTime()
+  );
+
+  useEffect(() => {
+    setLastUpdateTimestamp(new Date().getTime())
+  }, []);
 
   useEffect(async () => {
+    console.log('updating')
+    //setLastUpdateTimestamp(new Date().getTime())
     const result = await getPlans();
     if (result.status === 200) {
       setDb(result.data);
     }
-  }, []);
+  }, [lastUpdateTimestamp]);
 
   return (
     <>
