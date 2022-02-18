@@ -62,13 +62,22 @@ export default function App({}) {
   const { id } = useParams();
   const [currentPlan, setCurrentPlan] = useState();
 
+  const [lastUpdateTimestamp, setLastUpdateTimestamp] = useState(
+    new Date().getTime()
+  );
+
+  useEffect(() => {
+    setLastUpdateTimestamp(new Date().getTime())
+  }, []);
+
+
   useEffect(async () => {
     const plan = await getPlanById(id).then((response) => {
       setColumns([...response.data.years]);
       setCurrentPlan(response.data);
       console.log("set columns");
     });
-  }, []);
+  }, [lastUpdateTimestamp]);
 
   const saveChanges = async () => {
     currentPlan.years = columns;
@@ -97,7 +106,7 @@ export default function App({}) {
 
   const addColumn = async () => {
     await addQuarter(id);
-    window.location.replace("");
+    setLastUpdateTimestamp(new Date().getTime())
   };
 
   return (
