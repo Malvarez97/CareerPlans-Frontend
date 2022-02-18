@@ -1,5 +1,5 @@
 import { makeStyles, IconButton } from "@material-ui/core";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Droppable } from "react-beautiful-dnd";
 import Subject from "../kanban/Subject";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
@@ -10,20 +10,33 @@ import { useNavigate } from "react-router-dom";
 import { deleteYear } from "../../services/PlanService.";
 import { SnackbarData } from "../../SnackbarData";
 
-export default function ListSubjects({ column, columnId, index, id, data }) {
+export default function ListSubjects({ column, columnId, index, id, data, setLastUpdateTimestamp }) {
   const classes = useStyle();
   let history = useNavigate();
+  const [lastUpdateTimestamp2, setLastUpdateTimestamp2] = useState(
+    new Date().getTime()
+  );
+
+  useEffect(() => {
+    setLastUpdateTimestamp2(new Date().getTime())
+  }, []);
+
+
+/*   useEffect(async () => {
+    data  = data;
+  }, [lastUpdateTimestamp2]); */
 
   const handleDelete = async (e) => {
     console.log(e);
 
     const snackData = new SnackbarData("Plan updated succesfully! ", "success");
-    const response = await deleteYear(id, e.year).then(
+    const response = await deleteYear(id, e.year)
+    setLastUpdateTimestamp(new Date().getTime())
       document.dispatchEvent(
         new CustomEvent("snackMessage", {
           detail: { snackData },
         })
-      )
+      
     );
   };
 
@@ -58,7 +71,7 @@ export default function ListSubjects({ column, columnId, index, id, data }) {
               {column.items.map((item, index) => {
                 return (
                   <>
-                    <Subject item={item} key={item._id} index={index}></Subject>
+                    <Subject item={item} key={item._id} index={index} setLastUpdateTimestamp={setLastUpdateTimestamp}></Subject>
                   </>
                 );
               })}

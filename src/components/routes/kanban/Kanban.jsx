@@ -143,6 +143,7 @@ export default function App({}) {
                   id={id}
                   setColumns={setColumns}
                   columns={setColumns}
+                  setLastUpdateTimestamp = {setLastUpdateTimestamp}
                 ></ListSubjects>
               </div>
             </div>

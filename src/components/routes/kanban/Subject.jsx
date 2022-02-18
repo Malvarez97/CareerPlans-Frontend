@@ -10,7 +10,7 @@ import { useParams } from "react-router-dom";
 import { getSubjects } from "../../services/SubjectService";
 import { SnackbarData } from "../../SnackbarData";
 
-export default function Subject({ item, index }) {
+export default function Subject({ item, index,setLastUpdateTimestamp }) {
   const classes = useStyle();
   const { id } = useParams();
   let navigate = useNavigate();
@@ -27,7 +27,7 @@ export default function Subject({ item, index }) {
     setChanges();
     //to={`/interactive-plan/${id}?name=${currentPlan?.name}`}
     console.log(item._id);
-    navigate(`/edit-subject?planId=${id}&subject=${item._id}`);
+    //navigate(`/edit-subject?planId=${id}&subject=${item._id}`);
     /*     history("../edit-subject/" + item._id, {
       card: e,
     }); */
@@ -52,7 +52,8 @@ export default function Subject({ item, index }) {
         })
       );
     }
-    history("../plans/" + id, { replace: true });
+    //history("../plans/" + id, { replace: true });
+    setLastUpdateTimestamp(new Date().getTime())
   };
 
   return (
