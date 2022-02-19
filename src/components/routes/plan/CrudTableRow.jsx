@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { IconButton, makeStyles } from "@material-ui/core";
 import ClearIcon from "@mui/icons-material/Clear";
 import EditIcon from "@mui/icons-material/Edit";
@@ -8,11 +8,18 @@ import TableRow from "@mui/material/TableRow";
 import { deletePlan } from "../../services/PlanService.";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
-export const CrudTableRow = ({ row }) => {
+export const CrudTableRow = ({ row, setLastUpdateTimestamp }) => {
   // usando la api de context puedo evitar el paso de las propiedades y hacerlas directamente (mejora)
-
   const classes = useStyle();
 
+  useEffect(() => {
+    setLastUpdateTimestamp(new Date().getTime())
+  }, []);
+
+  const handleDelete = async (e) => {
+    const response = await deletePlan(e._id)
+    setLastUpdateTimestamp(new Date().getTime())
+  };
   return (
     <>
       <TableRow
@@ -36,7 +43,10 @@ export const CrudTableRow = ({ row }) => {
           </Link>
           <IconButton
             className={classes.iconDelete}
-            onClick={() => deletePlan(row._id)}
+            onClick={() => 
+              handleDelete(row)
+            
+             }
           >
             <ClearIcon />
           </IconButton>

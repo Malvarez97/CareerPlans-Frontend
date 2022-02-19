@@ -66,7 +66,7 @@ function CrudTable({}) {
                   <td colSpan="3">Sin Datos</td>
                 </tr>
               ) : (
-                db.map((row) => <CrudTableRow key={row._id} row={row} />)
+                db.map((row) => <CrudTableRow key={row._id} row={row} setLastUpdateTimestamp={setLastUpdateTimestamp}/>)
               )}
             </TableBody>
           </Table>
