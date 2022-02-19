@@ -1,42 +1,15 @@
 import { IconButton, makeStyles, Paper } from "@material-ui/core";
 import { Draggable } from "react-beautiful-dnd";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { deleteSubject, getPlanById } from "../../services/PlanService.";
+import { deleteSubject } from "../../services/PlanService.";
 import Card from "@mui/material/Card";
-import EditIcon from "@mui/icons-material/Edit";
 import ClearIcon from "@mui/icons-material/Clear";
 import { useParams } from "react-router-dom";
-import { getSubjects } from "../../services/SubjectService";
 import { SnackbarData } from "../../SnackbarData";
 
-export default function Subject({ item, index,setLastUpdateTimestamp }) {
+export default function Subject({ item, index, setLastUpdateTimestamp }) {
   const classes = useStyle();
   const { id } = useParams();
-  let navigate = useNavigate();
-  let history = useNavigate();
-  const [changes, setChangesOpen] = useState(false);
-
-  const setChanges = () => {
-    setChangesOpen(true);
-    console.log("changes se volvio true");
-    return;
-  };
-
-  const edit = async (e) => {
-    setChanges();
-    //to={`/interactive-plan/${id}?name=${currentPlan?.name}`}
-    console.log(item._id);
-    //navigate(`/edit-subject?planId=${id}&subject=${item._id}`);
-    /*     history("../edit-subject/" + item._id, {
-      card: e,
-    }); */
-  };
-
-  const goToPreviousPath = (e) => {
-    e.preventDefault();
-    history(-1);
-  };
 
   const removeSubject = async (e) => {
     console.log(e);
@@ -66,7 +39,6 @@ export default function Subject({ item, index,setLastUpdateTimestamp }) {
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             container
-            onClick={() => edit(item)}
             spacing={2}
             direction="row"
           >
