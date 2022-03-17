@@ -10,12 +10,12 @@ Tool to generate interactive plans, created using ReactJS(MUI), NodeJS and Mongo
 
 1. NodeJs (v16.13.1). Install(https://nodejs.org/es/download/)
 
-## Backend
+## Run Backend
 
 1. npm install
 2. npm run dev
 
-## Frontend
+## Run Frontend
 
 1. npm install
 2. npm run start
